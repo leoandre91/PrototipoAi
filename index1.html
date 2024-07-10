@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animaciones de Sensores</title>
+    <style>
+        .house {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-image: url('house_top_view.png'); /* Reemplaza con tu imagen */
+            background-size: cover;
+        }
+        .sensor {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .sensor.temperature { top: 210px; left: 10px; }
+        .sensor.motion { top: 250px; left: 200px; }
+        .sensor.light { top: 220px; left: 330px; }
+
+        .active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="house">
+        <div class="sensor temperature" id="temperature">Temp</div>
+        <div class="sensor motion" id="motion">Motion</div>
+        <div class="sensor light" id="light">Light</div>
+    </div>
+
+    <script>
+        function activateSensor(sensorId) {
+            const sensor = document.getElementById(sensorId);
+            sensor.classList.add('active');
+            // Puedes agregar lógica para desactivar la animación después de un tiempo
+            setTimeout(() => {
+                sensor.classList.remove('active');
+            }, 3000); // Duración de la animación en milisegundos
+        }
+
+        // Ejemplo de activación de sensores
+        function simulateSensors() {
+            activateSensor('temperature');
+            setTimeout(() => activateSensor('motion'), 1000);
+            setTimeout(() => activateSensor('light'), 2000);
+        }
+
+        // Activar la simulación al cargar la página
+        window.onload = simulateSensors;
+    </script>
+</body>
+</html>
